@@ -151,6 +151,13 @@ const CustomerReceipts = () => {
   });
 
   const onSubmit = (data: ReceiptFormValues) => {
+    const totalAlloc = Object.values(allocations).reduce((sum, val) => sum + (Number(val) || 0), 0);
+    const enteredAmt = Number(data.amount) || 0;
+    if (totalAlloc > enteredAmt + 0.009) {
+      toast.error(`Total allocated (${totalAlloc.toFixed(2)}) cannot exceed receipt amount (${enteredAmt.toFixed(2)})`);
+      return;
+    }
+
     const payload = {
       ...data,
       allocations: Object.entries(allocations).map(([saleId, amount]) => ({

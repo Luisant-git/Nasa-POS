@@ -142,14 +142,15 @@ const SupplierPaymentsReport = () => {
         totalReturns: s.totalReturns,
         netPending: s.netPending,
       }));
+      const totalReturnsConsol = searchFilteredConsolidation.reduce((sum: number, i: any) => sum + Number(i.totalReturns || 0), 0);
       rows.push({
         _sno: '',
-        supplierName: '',
+        supplierName: 'TOTAL',
         phone: '',
         _opening: '',
         totalPurchases: formatCurrency(totalPurchases),
         totalPayments: formatCurrency(totalPaid),
-        totalReturns: 'TOTAL:',
+        totalReturns: formatCurrency(totalReturnsConsol),
         netPending: formatCurrency(totalPendingPayables),
       });
       const title = `Supplier Payables Consolidation Report${startDate || endDate ? ` (${startDate || 'Start'} to ${endDate || 'End'})` : ''}`;

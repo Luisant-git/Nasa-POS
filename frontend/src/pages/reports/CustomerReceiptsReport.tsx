@@ -143,14 +143,15 @@ const CustomerReceiptsReport = () => {
         totalReturns: c.totalReturns,
         netPending: c.netPending,
       }));
+      const totalReturnsConsol = searchFilteredConsolidation.reduce((sum: number, i: any) => sum + Number(i.totalReturns || 0), 0);
       rows.push({
         _sno: '',
-        customerName: '',
+        customerName: 'TOTAL',
         phone: '',
         _opening: '',
         totalSales: formatCurrency(totalSales),
         totalReceipts: formatCurrency(totalCollected),
-        totalReturns: 'TOTAL:',
+        totalReturns: formatCurrency(totalReturnsConsol),
         netPending: formatCurrency(totalPendingDues),
       });
       const title = `Customer Dues Consolidation Report${startDate || endDate ? ` (${startDate || 'Start'} to ${endDate || 'End'})` : ''}`;
