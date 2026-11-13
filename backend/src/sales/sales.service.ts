@@ -75,7 +75,6 @@ export class SalesService {
           data: {
             currentStock: { decrement: item.quantity },
             currentBirds: { decrement: item.noOfBirds || 0 },
-            ...(item.rate > 0 && { sellingRate: item.rate }),
           },
         });
 
@@ -319,7 +318,6 @@ export class SalesService {
           data: {
             currentStock: { decrement: item.quantity },
             currentBirds: { decrement: item.noOfBirds || 0 },
-            ...(item.rate > 0 && { sellingRate: item.rate }),
           },
         });
 
